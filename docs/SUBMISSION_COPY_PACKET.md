@@ -6,7 +6,7 @@ Goose Bounty/Grant Scout MCP is a Goose extension that helps developers rank bou
 
 ## Public Repo
 
-To be filled after publication.
+https://github.com/sevencat2004/goose-bountypay-scout
 
 ## Requested Grant
 

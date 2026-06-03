@@ -2,6 +2,8 @@
 
 Goose Bounty/Grant Scout MCP is a local MCP extension for ranking developer funding opportunities by practical payment likelihood, agent autonomy, and delivery risk.
 
+Public repo: https://github.com/sevencat2004/goose-bountypay-scout
+
 The first MVP is deliberately compact:
 
 - `score_opportunity` scores one bounty or grant.
