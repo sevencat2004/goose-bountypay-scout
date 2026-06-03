@@ -16,8 +16,8 @@ const SOURCE_BASE = {
   boss: { collectability: 58, autonomy: 70, risk: 45 },
   drips: { collectability: 42, autonomy: 50, risk: 62 },
   expensify: { collectability: 62, autonomy: 35, risk: 64 },
-  stellar_scf: { collectability: 72, autonomy: 78, risk: 46 },
-  goose_grant: { collectability: 78, autonomy: 82, risk: 42 },
+  stellar_scf: { collectability: 76, autonomy: 80, risk: 40 },
+  goose_grant: { collectability: 82, autonomy: 86, risk: 34 },
   code4rena: { collectability: 66, autonomy: 38, risk: 78 },
   bugcrowd: { collectability: 30, autonomy: 10, risk: 95 }
 };
@@ -70,6 +70,7 @@ export function scoreOpportunity(raw) {
   const item = normalizeOpportunity(raw);
   const base = SOURCE_BASE[item.source] || DEFAULT_BASE;
   const text = `${item.title} ${item.labels.join(" ")} ${item.notes} ${item.status}`.toLowerCase();
+  const grantLike = item.source.includes("grant") || item.labels.some((label) => textOf(label).includes("grant"));
 
   let collectability = base.collectability + amountBonus(item.amountUsd);
   let autonomy = base.autonomy;
@@ -98,10 +99,17 @@ export function scoreOpportunity(raw) {
   }
 
   if (item.proposalGate) {
-    collectability -= 10;
-    autonomy -= 22;
-    risk += 18;
-    reasons.push("proposal or reviewer gate before PR");
+    if (grantLike) {
+      collectability -= 3;
+      autonomy -= 4;
+      risk += 4;
+      reasons.push("grant proposal review required");
+    } else {
+      collectability -= 10;
+      autonomy -= 22;
+      risk += 18;
+      reasons.push("proposal or reviewer gate before PR");
+    }
   }
 
   if (item.openPrs > 0) {
@@ -132,14 +140,14 @@ export function scoreOpportunity(raw) {
   }
 
   if (hasAny(text, ["kyc", "tax", "wallet", "account", "upwork"])) {
-    collectability -= 4;
-    risk += 8;
+    collectability -= grantLike ? 2 : 4;
+    risk += grantLike ? 3 : 8;
     reasons.push("user-side payout or account step likely");
   }
 
   if (item.requiresUserAccount) {
-    autonomy -= 15;
-    risk += 10;
+    autonomy -= grantLike ? 6 : 15;
+    risk += grantLike ? 3 : 10;
     reasons.push("requires user-owned account action");
   }
 

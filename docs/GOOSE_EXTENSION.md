@@ -31,7 +31,10 @@ Return the decision, score, risk factors, and next action.
 - `rank_opportunities`: rank multiple opportunities.
 - `analyze_github_issue`: fetch and score one public GitHub issue URL.
 - `search_github_opportunities`: search public GitHub issues and score returned issue URLs.
+- `normalize_algora_like`: normalize Algora-style bounty metadata.
+- `normalize_grant_program`: normalize grant program metadata.
 - `generate_scout_report`: produce a Markdown scout report from structured opportunities.
+- `save_scout_report`: save Markdown and JSON scout reports to disk.
 - `draft_grant_package`: create a grant proposal package for this project.
 
 ## Design Notes

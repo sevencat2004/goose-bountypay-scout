@@ -21,7 +21,10 @@ try {
     "analyze_github_issue",
     "draft_grant_package",
     "generate_scout_report",
+    "normalize_algora_like",
+    "normalize_grant_program",
     "rank_opportunities",
+    "save_scout_report",
     "score_opportunity",
     "search_github_opportunities"
   ]);
@@ -70,6 +73,20 @@ try {
   });
 
   assert.ok(report.content[0].text.includes("Top recommendation"));
+
+  const normalized = await client.callTool({
+    name: "normalize_grant_program",
+    arguments: {
+      item: {
+        projectName: "Goose Scout",
+        requestedBudgetUsd: 48000,
+        milestoneBased: true,
+        rollingReview: true
+      }
+    }
+  });
+
+  assert.ok(normalized.content[0].text.includes("goose_grant"));
   console.log("mcp smoke passed");
 } finally {
   await client.close();

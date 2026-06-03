@@ -10,7 +10,10 @@ The first MVP is deliberately compact:
 - `rank_opportunities` ranks a list and explains the top recommendation.
 - `analyze_github_issue` fetches a public GitHub issue URL and scores it.
 - `search_github_opportunities` searches public GitHub issues and scores returned issues.
+- `normalize_algora_like` converts Algora-style bounty metadata into the common opportunity shape.
+- `normalize_grant_program` converts grant metadata into the common opportunity shape.
 - `generate_scout_report` turns ranked opportunities into a Markdown report.
+- `save_scout_report` writes Markdown and JSON reports to disk.
 - `draft_grant_package` drafts the Goose grant package for this project.
 
 The project is built as a Goose-connectable MCP server rather than a standalone-only script, so Goose can use it inside normal agent sessions.

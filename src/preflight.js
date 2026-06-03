@@ -5,8 +5,10 @@ import { execFileSync } from "node:child_process";
 const required = [
   "package.json",
   "src/server.js",
+  "src/adapters.js",
   "src/scoring.js",
   "src/grant.js",
+  "src/report.js",
   "README.md",
   "LICENSE",
   "docs/GOOSE_EXTENSION.md",

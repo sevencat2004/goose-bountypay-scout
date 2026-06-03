@@ -7,6 +7,8 @@
 - Public GitHub issue live analyzer.
 - Public GitHub issue search.
 - Markdown scout report generation.
+- Algora-style and grant-program input normalization.
+- Persisted Markdown/JSON report files.
 - Grant application draft generator.
 - Self-test, MCP smoke test, and preflight.
 
@@ -27,9 +29,9 @@ Remaining polish:
 Planned:
 
 - GitHub issue search adapter.
-- Algora-style board parser or GitHub label/payout inference.
-- Manual grant-program source adapter.
-- JSON report writer and persisted report files.
+- Algora-style board parser or deeper GitHub label/payout inference.
+- Live grant-program source adapter.
+- Scheduled report generation and history comparison.
 - Source health and failure reporting.
 
 ### M3 - Submission Assistant And Payment-Risk Tracker

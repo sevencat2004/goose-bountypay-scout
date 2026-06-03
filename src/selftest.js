@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import { rankOpportunities, scoreOpportunity } from "./scoring.js";
 import { buildGrantPackage, grantMarkdown } from "./grant.js";
 import { reportMarkdown } from "./report.js";
+import { fromAlgoraLike, fromGrantProgram, normalizeSourceItems, saveScoutReport } from "./adapters.js";
 
 const goose = scoreOpportunity({
   title: "Goose Bounty/Grant Scout MCP",
@@ -41,5 +43,43 @@ const report = reportMarkdown([
 ]);
 assert.ok(report.markdown.includes("Top recommendation"));
 assert.ok(report.markdown.includes("User-Owned Actions"));
+
+const algora = fromAlgoraLike({
+  issueTitle: "Crowded bounty",
+  bountyUsd: "$440",
+  attempts: 6,
+  commentCount: 25,
+  claimRequiresApproval: true
+});
+assert.equal(algora.source, "algora");
+assert.equal(algora.amountUsd, 440);
+assert.equal(algora.openPrs, 6);
+
+const grant = fromGrantProgram({
+  projectName: "Goose Scout",
+  requestedBudgetUsd: "48000",
+  milestoneBased: true,
+  rollingReview: true,
+  timelineMonths: 4
+});
+assert.equal(grant.source, "goose_grant");
+assert.ok(grant.notes.includes("rolling review"));
+
+const saved = saveScoutReport({
+  title: "Selftest Report",
+  fileBaseName: "selftest-report",
+  outputDir: "reports/selftest",
+  algoraLike: [algora],
+  grants: [grant]
+});
+assert.ok(saved.markdownPath.endsWith("selftest-report.md"));
+assert.ok(saved.jsonPath.endsWith("selftest-report.json"));
+
+const sampleInput = JSON.parse(fs.readFileSync("examples/opportunities.sample.json", "utf8"));
+const sampleItems = normalizeSourceItems(sampleInput);
+assert.equal(sampleItems.length, 3);
+const sampleReport = reportMarkdown(sampleItems);
+assert.ok(sampleReport.markdown.includes("Goose Bounty/Grant Scout MCP"));
+assert.equal(sampleReport.ranked[0].decision, "pursue_now");
 
 console.log("selftest passed");

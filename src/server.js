@@ -6,6 +6,7 @@ import { rankOpportunities, scoreOpportunity, summarizeRanking } from "./scoring
 import { buildGrantPackage, grantMarkdown } from "./grant.js";
 import { analyzeGitHubIssue, searchGitHubOpportunities } from "./github.js";
 import { reportMarkdown } from "./report.js";
+import { fromAlgoraLike, fromGrantProgram, saveScoutReport } from "./adapters.js";
 
 const server = new McpServer({
   name: "goose-bountypay-scout",
@@ -28,6 +29,84 @@ const OpportunitySchema = z.object({
   requiresUserAccount: z.boolean().optional(),
   notes: z.string().optional()
 });
+
+const AlgoraLikeSchema = z.object({
+  title: z.string().optional(),
+  issueTitle: z.string().optional(),
+  name: z.string().optional(),
+  source: z.string().optional(),
+  url: z.string().optional(),
+  issueUrl: z.string().optional(),
+  repo: z.string().optional(),
+  amountUsd: z.union([z.number(), z.string()]).optional(),
+  amount: z.union([z.number(), z.string()]).optional(),
+  bountyUsd: z.union([z.number(), z.string()]).optional(),
+  rewardUsd: z.union([z.number(), z.string()]).optional(),
+  comments: z.union([z.number(), z.string()]).optional(),
+  commentCount: z.union([z.number(), z.string()]).optional(),
+  openPrs: z.union([z.number(), z.string()]).optional(),
+  prCount: z.union([z.number(), z.string()]).optional(),
+  attempts: z.union([z.number(), z.string()]).optional(),
+  claims: z.union([z.number(), z.string()]).optional(),
+  labels: z.array(z.string()).optional(),
+  status: z.string().optional(),
+  open: z.boolean().optional(),
+  assigned: z.boolean().optional(),
+  assignee: z.string().optional(),
+  requiresAssignment: z.boolean().optional(),
+  claimRequiresApproval: z.boolean().optional(),
+  proposalGate: z.boolean().optional(),
+  aiAllowed: z.boolean().optional(),
+  requiresUserAccount: z.boolean().optional(),
+  claimUrl: z.string().optional(),
+  notes: z.string().optional()
+});
+
+const GrantSchema = z.object({
+  title: z.string().optional(),
+  projectName: z.string().optional(),
+  source: z.string().optional(),
+  url: z.string().optional(),
+  amountUsd: z.union([z.number(), z.string()]).optional(),
+  requestedBudgetUsd: z.union([z.number(), z.string()]).optional(),
+  maxGrantUsd: z.union([z.number(), z.string()]).optional(),
+  status: z.string().optional(),
+  labels: z.array(z.string()).optional(),
+  timelineMonths: z.union([z.number(), z.string()]).optional(),
+  milestoneBased: z.boolean().optional(),
+  rollingReview: z.boolean().optional(),
+  requiresKyc: z.boolean().optional(),
+  aiAllowed: z.boolean().optional(),
+  notes: z.string().optional()
+});
+
+server.tool(
+  "normalize_algora_like",
+  "Convert Algora-style bounty metadata into the standard opportunity format used by the scout.",
+  { item: AlgoraLikeSchema },
+  async ({ item }) => ({
+    content: [
+      {
+        type: "text",
+        text: JSON.stringify(fromAlgoraLike(item), null, 2)
+      }
+    ]
+  })
+);
+
+server.tool(
+  "normalize_grant_program",
+  "Convert grant program metadata into the standard opportunity format used by the scout.",
+  { item: GrantSchema },
+  async ({ item }) => ({
+    content: [
+      {
+        type: "text",
+        text: JSON.stringify(fromGrantProgram(item), null, 2)
+      }
+    ]
+  })
+);
 
 server.tool(
   "search_github_opportunities",
@@ -89,6 +168,27 @@ server.tool(
       ]
     };
   }
+);
+
+server.tool(
+  "save_scout_report",
+  "Generate and save Markdown plus JSON scout reports from structured opportunities, Algora-style items, and grant program items.",
+  {
+    title: z.string().optional(),
+    fileBaseName: z.string().optional(),
+    outputDir: z.string().optional(),
+    opportunities: z.array(OpportunitySchema).optional(),
+    algoraLike: z.array(AlgoraLikeSchema).optional(),
+    grants: z.array(GrantSchema).optional()
+  },
+  async (input) => ({
+    content: [
+      {
+        type: "text",
+        text: JSON.stringify(saveScoutReport(input), null, 2)
+      }
+    ]
+  })
 );
 
 server.tool(
