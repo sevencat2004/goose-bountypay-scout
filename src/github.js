@@ -132,3 +132,31 @@ export async function analyzeGitHubIssue(url) {
     recommendation: scoreOpportunity(opportunity)
   };
 }
+
+export async function searchGitHubOpportunities(input = {}) {
+  const query = input.query || 'is:issue is:open bounty';
+  const limit = Math.max(1, Math.min(20, Number(input.limit || 5)));
+  const encoded = encodeURIComponent(query);
+  const data = await fetchJson(`https://api.github.com/search/issues?q=${encoded}&sort=updated&order=desc&per_page=${limit}`);
+
+  const results = [];
+  for (const item of data.items || []) {
+    if (!item.html_url || item.pull_request) continue;
+    try {
+      results.push(await analyzeGitHubIssue(item.html_url));
+    } catch (error) {
+      results.push({
+        url: item.html_url,
+        fetchedAt: new Date().toISOString(),
+        error: error.message
+      });
+    }
+  }
+
+  return {
+    query,
+    totalCount: data.total_count || 0,
+    returned: results.length,
+    results
+  };
+}

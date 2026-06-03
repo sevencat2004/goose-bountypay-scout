@@ -9,6 +9,8 @@ The first MVP is deliberately compact:
 - `score_opportunity` scores one bounty or grant.
 - `rank_opportunities` ranks a list and explains the top recommendation.
 - `analyze_github_issue` fetches a public GitHub issue URL and scores it.
+- `search_github_opportunities` searches public GitHub issues and scores returned issues.
+- `generate_scout_report` turns ranked opportunities into a Markdown report.
 - `draft_grant_package` drafts the Goose grant package for this project.
 
 The project is built as a Goose-connectable MCP server rather than a standalone-only script, so Goose can use it inside normal agent sessions.

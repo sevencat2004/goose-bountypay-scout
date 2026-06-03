@@ -30,6 +30,8 @@ Return the decision, score, risk factors, and next action.
 - `score_opportunity`: score one opportunity.
 - `rank_opportunities`: rank multiple opportunities.
 - `analyze_github_issue`: fetch and score one public GitHub issue URL.
+- `search_github_opportunities`: search public GitHub issues and score returned issue URLs.
+- `generate_scout_report`: produce a Markdown scout report from structured opportunities.
 - `draft_grant_package`: create a grant proposal package for this project.
 
 ## Design Notes

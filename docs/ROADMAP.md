@@ -5,6 +5,8 @@
 - STDIO MCP server for Goose.
 - Deterministic opportunity scoring.
 - Public GitHub issue live analyzer.
+- Public GitHub issue search.
+- Markdown scout report generation.
 - Grant application draft generator.
 - Self-test, MCP smoke test, and preflight.
 
@@ -27,7 +29,7 @@ Planned:
 - GitHub issue search adapter.
 - Algora-style board parser or GitHub label/payout inference.
 - Manual grant-program source adapter.
-- Markdown/JSON report writer.
+- JSON report writer and persisted report files.
 - Source health and failure reporting.
 
 ### M3 - Submission Assistant And Payment-Risk Tracker

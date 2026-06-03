@@ -17,7 +17,14 @@ try {
 
   const tools = await client.listTools();
   const names = tools.tools.map((tool) => tool.name).sort();
-  assert.deepEqual(names, ["analyze_github_issue", "draft_grant_package", "rank_opportunities", "score_opportunity"]);
+  assert.deepEqual(names, [
+    "analyze_github_issue",
+    "draft_grant_package",
+    "generate_scout_report",
+    "rank_opportunities",
+    "score_opportunity",
+    "search_github_opportunities"
+  ]);
 
   const ranked = await client.callTool({
     name: "rank_opportunities",
@@ -47,6 +54,22 @@ try {
   });
 
   assert.ok(grant.content[0].text.includes("Requested budget: $48,000"));
+
+  const report = await client.callTool({
+    name: "generate_scout_report",
+    arguments: {
+      opportunities: [
+        {
+          title: "Goose Bounty/Grant Scout MCP",
+          source: "goose_grant",
+          amountUsd: 48000,
+          notes: "rolling review milestone grant"
+        }
+      ]
+    }
+  });
+
+  assert.ok(report.content[0].text.includes("Top recommendation"));
   console.log("mcp smoke passed");
 } finally {
   await client.close();

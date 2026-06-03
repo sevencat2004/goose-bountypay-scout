@@ -4,7 +4,8 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { rankOpportunities, scoreOpportunity, summarizeRanking } from "./scoring.js";
 import { buildGrantPackage, grantMarkdown } from "./grant.js";
-import { analyzeGitHubIssue } from "./github.js";
+import { analyzeGitHubIssue, searchGitHubOpportunities } from "./github.js";
+import { reportMarkdown } from "./report.js";
 
 const server = new McpServer({
   name: "goose-bountypay-scout",
@@ -27,6 +28,23 @@ const OpportunitySchema = z.object({
   requiresUserAccount: z.boolean().optional(),
   notes: z.string().optional()
 });
+
+server.tool(
+  "search_github_opportunities",
+  "Search public GitHub issues, analyze returned issue URLs, and score likely bounty/grant opportunities.",
+  {
+    query: z.string().optional(),
+    limit: z.number().min(1).max(20).optional()
+  },
+  async (input) => ({
+    content: [
+      {
+        type: "text",
+        text: JSON.stringify(await searchGitHubOpportunities(input), null, 2)
+      }
+    ]
+  })
+);
 
 server.tool(
   "analyze_github_issue",
@@ -67,6 +85,26 @@ server.tool(
         {
           type: "text",
           text: `${summarizeRanking(ranked)}\n\n${JSON.stringify(ranked, null, 2)}`
+        }
+      ]
+    };
+  }
+);
+
+server.tool(
+  "generate_scout_report",
+  "Generate a Markdown report from structured bounty or grant opportunities.",
+  {
+    opportunities: z.array(OpportunitySchema).min(1),
+    title: z.string().optional()
+  },
+  async ({ opportunities, title }) => {
+    const report = reportMarkdown(opportunities, { title });
+    return {
+      content: [
+        {
+          type: "text",
+          text: report.markdown
         }
       ]
     };
