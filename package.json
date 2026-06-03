@@ -1,0 +1,29 @@
+{
+  "name": "goose-bountypay-scout",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Goose MCP extension for bounty and grant opportunity triage by collectability, autonomy, and delivery risk.",
+  "type": "module",
+  "bin": {
+    "goose-bountypay-scout": "./src/server.js"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "demo": "node src/demo.js",
+    "test": "node src/selftest.js",
+    "test:mcp": "node src/mcp-smoke.js",
+    "preflight": "node src/preflight.js"
+  },
+  "keywords": [
+    "goose",
+    "mcp",
+    "bounty",
+    "grant",
+    "developer-tools"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.13.0",
+    "zod": "^3.25.56"
+  }
+}

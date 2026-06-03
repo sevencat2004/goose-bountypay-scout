@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Goose Bounty/Grant Scout MCP",
+    "source": "goose_grant",
+    "amountUsd": 48000,
+    "status": "rolling grant",
+    "comments": 0,
+    "openPrs": 0,
+    "notes": "milestone-based grant proposal for a Goose MCP extension"
+  },
+  {
+    "title": "Crowded GitHub UI bounty",
+    "source": "algora",
+    "amountUsd": 440,
+    "comments": 25,
+    "openPrs": 6,
+    "requiresAssignment": true,
+    "notes": "many attempts and duplicate PRs already exist"
+  },
+  {
+    "title": "AI-prohibited security bounty",
+    "source": "bugcrowd",
+    "amountUsd": 5000,
+    "aiAllowed": false,
+    "notes": "program rules prohibit AI tools during research"
+  }
+]
