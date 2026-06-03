@@ -8,12 +8,14 @@
 - 建议申请金额：48,000 USD
 - 建议周期：4 个月
 - 本地路径：`D:\coin\goose-bountypay-scout`
-- 当前状态：MVP 已搭建为本地 STDIO MCP server，可给 Goose 接入
+- GitHub：`https://github.com/sevencat2004/goose-bountypay-scout`
+- 当前状态：MVP 已搭建为本地 STDIO MCP server，可给 Goose 接入；公开仓库、申请草稿、最终表单答案、来源说明和测试都已准备好
 
 ## 用户稍后需要做的事
 
 - 用自己的账号打开 Goose Grant 申请入口。
-- 粘贴 `docs/GRANT_APPLICATION.md` 里的英文申请内容。
+- 优先使用 `docs/FINAL_APPLICATION_FORM_ANSWERS.md` 里的逐字段英文答案。
+- 如果表单是长文本格式，可以参考 `docs/GRANT_APPLICATION.md` 和 `docs/SUBMISSION_COPY_PACKET.md`。
 - 如果表单要求，填写真实姓名、邮箱、国家/地区、收款/KYC/税务信息。
 - 如果项目获批，按对方要求完成 milestone 验收和付款资料。
 
@@ -31,5 +33,6 @@
 - `npm.cmd run test:mcp` 通过
 - `npm.cmd run preflight` 通过
 - README 能说明如何用 Goose 连接 MCP server
-- Grant 文档里金额、周期、里程碑和交付物一致
+- GitHub 公开仓库能打开
+- Grant 文档里金额、周期、里程碑、交付物和 public repo URL 一致
 - 用户本人确认最终申请金额可以接受

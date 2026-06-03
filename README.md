@@ -63,6 +63,7 @@ Then ask Goose to rank a list of bounty or grant opportunities. See [docs/GOOSE_
 ## Grant Materials
 
 - [Grant application draft](docs/GRANT_APPLICATION.md)
+- [Final application form answers](docs/FINAL_APPLICATION_FORM_ANSWERS.md)
 - [Submission copy packet](docs/SUBMISSION_COPY_PACKET.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Demo prompt](docs/DEMO_PROMPT.md)

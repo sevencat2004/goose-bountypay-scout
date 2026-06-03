@@ -13,6 +13,7 @@ const required = [
   "LICENSE",
   "docs/GOOSE_EXTENSION.md",
   "docs/GRANT_APPLICATION.md",
+  "docs/FINAL_APPLICATION_FORM_ANSWERS.md",
   "docs/SUBMISSION_COPY_PACKET.md",
   "docs/ROADMAP.md",
   "docs/DEMO_PROMPT.md",

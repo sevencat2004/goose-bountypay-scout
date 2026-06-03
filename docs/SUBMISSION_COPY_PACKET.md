@@ -31,7 +31,14 @@ Open-source contributors waste time chasing rewards that are already assigned, d
 - Local MCP server implemented.
 - MCP client smoke test passes.
 - GitHub issue analyzer works against public GitHub API.
+- GitHub issue search works against public GitHub API.
+- Algora-style and grant-program metadata can be normalized into the common opportunity shape.
+- Markdown/JSON scout reports can be saved locally.
 - Grant draft and Chinese user checklist are included.
+
+## Final Form Answers
+
+Use `docs/FINAL_APPLICATION_FORM_ANSWERS.md` for field-by-field application copy.
 
 ## User-Owned Steps
 
