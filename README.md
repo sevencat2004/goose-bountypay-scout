@@ -63,6 +63,7 @@ Then ask Goose to rank a list of bounty or grant opportunities. See [docs/GOOSE_
 - [Submission copy packet](docs/SUBMISSION_COPY_PACKET.md)
 - [Roadmap](docs/ROADMAP.md)
 - [Demo prompt](docs/DEMO_PROMPT.md)
+- [Source notes](docs/SOURCE_NOTES.md)
 - [Chinese user checklist](docs/USER_SUBMISSION_CHECKLIST.zh-CN.md)
 
 ## Current Scope

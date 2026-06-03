@@ -14,6 +14,7 @@ const required = [
   "docs/SUBMISSION_COPY_PACKET.md",
   "docs/ROADMAP.md",
   "docs/DEMO_PROMPT.md",
+  "docs/SOURCE_NOTES.md",
   "docs/USER_SUBMISSION_CHECKLIST.zh-CN.md"
 ];
 
