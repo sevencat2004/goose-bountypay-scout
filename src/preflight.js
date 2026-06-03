@@ -8,8 +8,12 @@ const required = [
   "src/scoring.js",
   "src/grant.js",
   "README.md",
+  "LICENSE",
   "docs/GOOSE_EXTENSION.md",
   "docs/GRANT_APPLICATION.md",
+  "docs/SUBMISSION_COPY_PACKET.md",
+  "docs/ROADMAP.md",
+  "docs/DEMO_PROMPT.md",
   "docs/USER_SUBMISSION_CHECKLIST.zh-CN.md"
 ];
 

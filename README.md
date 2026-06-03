@@ -53,6 +53,14 @@ goose session --with-extension "node D:\coin\goose-bountypay-scout\src\server.js
 
 Then ask Goose to rank a list of bounty or grant opportunities. See [docs/GOOSE_EXTENSION.md](docs/GOOSE_EXTENSION.md).
 
+## Grant Materials
+
+- [Grant application draft](docs/GRANT_APPLICATION.md)
+- [Submission copy packet](docs/SUBMISSION_COPY_PACKET.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Demo prompt](docs/DEMO_PROMPT.md)
+- [Chinese user checklist](docs/USER_SUBMISSION_CHECKLIST.zh-CN.md)
+
 ## Current Scope
 
 This MVP uses structured manual inputs and deterministic scoring. Later grant milestones add live-source adapters for GitHub, Algora-style boards, grant pages, and local follow-up records.
